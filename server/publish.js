@@ -1,22 +1,14 @@
-// Lists -- {name: String}
-Lists = new Meteor.Collection("lists");
+// Material -- {name: String}
+Material = new Meteor.Collection("material");
+Donation = new Meteor.Collection("donation");
 
-// Publish complete set of lists to all clients.
-Meteor.publish('lists', function () {
-  return Lists.find();
+// Publish complete set of materials to all clients.
+Meteor.publish('material', function () {
+  return Material.find();
 });
 
-
-// Todos -- {text: String,
-//           done: Boolean,
-//           tags: [String, ...],
-//           list_id: String,
-//           timestamp: Number}
-Todos = new Meteor.Collection("todos");
-
-// Publish all items for requested list_id.
-Meteor.publish('todos', function (list_id) {
-  check(list_id, String);
-  return Todos.find({list_id: list_id});
+// Publish complete set of donations to all clients.
+Meteor.publish('donation', function () {
+  return Donation.find();
 });
 

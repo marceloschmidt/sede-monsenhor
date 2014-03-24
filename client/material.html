@@ -1,0 +1,121 @@
+<head>
+  <title>Reconstrução da Sede do GE Monsenhor André Pedro Frank</title>
+</head>
+
+<body>
+  <div id="top-tag-filter">
+    {{> header}}
+  </div>
+
+  <div id="main-pane">
+    {{> main}}
+  </div>
+
+  <div id="side-pane">
+    {{> instruction}}
+  </div>
+</body>
+
+<template name="main">
+  {{#if show_donators}}
+    {{> donators}}
+  {{else}}
+    {{> materials}}
+  {{/if}}
+</template>
+
+<template name="instruction">
+  <h3>Instruções</h3>
+  <p>Faça sua doação informando o que gostaria de doar. Entraremos em contato para confirmar a informação e fornecer maiores informações em como proceder com a doação.</p>
+  <p>Além disso, é possível ajudar realizando um depósito na Conta Poupança xxxx.xxxx.xxxx ou contribuindo abaixo, por boleto bancário ou cartão de crédito.</p>
+  <p style="text-align: center"><a href="http://www10.vakinha.com.br/VaquinhaE.aspx?e=260424"><img src="/vakinha6.png" style="width: 150px"></a></p>
+  <p>O <b>Monsenhor</b> agradece de coração!</p>
+  <hr style="margin: 30px">
+  {{#if show_donators}}
+    <div style="text-align: center; margin-bottom: 20px"><a href="/">Donativos</a></div>
+  {{else}}
+    <div style="text-align: center; margin-bottom: 20px"><a href="/">Quem já doou?</a></div>
+  {{/if}}
+</template>
+
+<template name="materials">
+  <div id="items-view">
+    {{#if loading}}
+      Carregando...
+    {{else}}
+      <ul id="item-list">
+        {{#each materials}}
+          {{> material}}
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+</template>
+
+<template name="donators">
+  <div id="items-view">
+    {{#if loading}}
+      Carregando...
+    {{else}}
+      <ul id="item-list">
+        {{#each donators}}
+          {{> donator}}
+        {{/each}}
+      </ul>
+    {{/if}}
+  </div>
+</template>
+
+<template name="material">
+  <li class="material {{done_class}}">
+    <div class="display">
+      <div class="material-name">{{name}}</div>
+      {{#if quantity}}
+        <div class="material-total">
+          <small>
+          Total {{quantity_value}}
+          </small>
+        </div>
+        <div class="material-left">
+          <small>
+          {{#if quantity_plural}}
+            Faltam {{quantity_left}}
+          {{else}}
+            Falta {{quantity_left}}
+          {{/if}}
+          </small>
+        </div>
+      {{/if}}
+    </div>
+    <div class="donate">
+    {{#if donating}}
+      <div class="donating">
+        <input type="text" id="add-donation-name" value="" placeholder="Nome" />
+        <input type="text" id="add-donation-phone" value="" placeholder="Telefone" />
+        <input type="text" id="add-donation-quantity" value="" placeholder="Quantidade" />
+        <button id="add-donation-save">Doar</button>
+        <button id="add-donation-cancel">Cancelar</button>
+      </div>
+    {{else}}
+      <div class="add_donation">
+        + Fazer uma doação
+      </div>
+    {{/if}}
+    </div>
+  </li>
+</template>
+
+<template name="donator">
+  <li class="donator">
+    <div class="display">
+      <div class="donator-name">{{name}}</div>
+      <div class="donator-quantity">{{quantity}}</div>
+    </div>
+  </li>
+</template>
+
+<template name="header">
+  <div id="header">
+    Ajude a reconstruir a sede do <strong>Grupo Escoteiro Monsenhor André Pedro Frank</strong>
+  </div>
+</template>
