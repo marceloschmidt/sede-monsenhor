@@ -1,5 +1,6 @@
 <head>
   <title>Reconstrução da Sede do GE Monsenhor André Pedro Frank</title>
+  <script src="bower_components/jquery-meiomask/dist/meiomask.min.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -32,9 +33,9 @@
   <p>O <b>Monsenhor</b> agradece de coração!</p>
   <hr style="margin: 30px">
   {{#if show_donators}}
-    <div style="text-align: center; margin-bottom: 20px"><a href="/">Donativos</a></div>
+    <div style="text-align: center; margin-bottom: 20px"><a href="/" class="donators">Donativos</a></div>
   {{else}}
-    <div style="text-align: center; margin-bottom: 20px"><a href="/">Quem já doou?</a></div>
+    <div style="text-align: center; margin-bottom: 20px"><a href="/" class="donators">Quem já doou?</a></div>
   {{/if}}
 </template>
 
@@ -79,9 +80,9 @@
         <div class="material-left">
           <small>
           {{#if quantity_plural}}
-            Faltam {{quantity_left}}
+            Faltam {{quantity_left}} {{quantity_unit}}
           {{else}}
-            Falta {{quantity_left}}
+            Falta {{quantity_left}} {{quantity_unit}}
           {{/if}}
           </small>
         </div>
@@ -90,11 +91,22 @@
     <div class="donate">
     {{#if donating}}
       <div class="donating">
-        <input type="text" id="add-donation-name" value="" placeholder="Nome" />
-        <input type="text" id="add-donation-phone" value="" placeholder="Telefone" />
-        <input type="text" id="add-donation-quantity" value="" placeholder="Quantidade" />
-        <button id="add-donation-save">Doar</button>
-        <button id="add-donation-cancel">Cancelar</button>
+        <form class="form-inline" role="form" id="add-donation">
+          <div class="form-group">
+            <label class="sr-only" for="add-donation-name">Nome</label>
+            <input type="text" class="form-control" id="add-donation-name" placeholder="Nome">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="add-donation-phone">Telefone</label>
+            <input type="text" class="form-control" id="add-donation-phone" placeholder="Telefone" alt="phone">
+          </div>
+          <div class="form-group">
+            <label class="sr-only" for="add-donation-quantity">Quantidade</label>
+            <input type="text" class="form-control" id="add-donation-quantity" placeholder="Quantidade" alt="999" style="width: 100px">
+          </div>
+          <button class="btn btn-default btn-primary" id="add-donation-save">Doar</button>
+          <button class="btn btn-default" id="add-donation-cancel">Cancelar</button>
+        </form>
       </div>
     {{else}}
       <div class="add_donation">
@@ -108,8 +120,7 @@
 <template name="donator">
   <li class="donator">
     <div class="display">
-      <div class="donator-name">{{name}}</div>
-      <div class="donator-quantity">{{quantity}}</div>
+      {{name}} doou {{quantity}} {{material}}
     </div>
   </li>
 </template>
