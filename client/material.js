@@ -94,8 +94,8 @@ Template.material.events({
     evt.preventDefault();
     if (validateDonation()) {
       insertDonation();
+      cancelDonation();
     }
-    cancelDonation();
   }
 });
 
